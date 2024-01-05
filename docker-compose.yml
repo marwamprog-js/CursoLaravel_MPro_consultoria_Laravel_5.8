@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  php:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: laravel_5.8
+    restart: always
+    ports:
+      - '8080:80'
+      - "443:443"
+    volumes:
+    - .:/var/www/html
+    links:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: laravel_mysql
+    restart: unless-stopped
+    ports:
+      - 3307:3306
+    volumes:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=sistema_login_db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+
+  # redis
+  redis:
+      image: redis:latest
+      networks:
+          - laravel
+
+networks:
+    laravel:
+        driver: bridge
