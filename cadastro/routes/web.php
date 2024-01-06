@@ -25,9 +25,5 @@ Route::get('/categorias/{id}/editar', 'ControladorCategoria@edit')->name('catego
 Route::post('/categorias/{id}', 'ControladorCategoria@update')->name('categorias.update');
 
 
-Route::get('/produtos', 'ControladorProduto@index')->name('produtos');
-Route::get('/produtos/nova', 'ControladorProduto@create')->name('produtos.create');
-Route::post('/produtos', 'ControladorProduto@store')->name('produtos.store');
-Route::get('/produtos/{id}/editar', 'ControladorProduto@edit')->name('produtos.edit');
-Route::post('/produtos/{id}', 'ControladorProduto@update')->name('produtos.update');
-Route::get('/produtos/{id}/apagar', 'ControladorProduto@destroy')->name('produtos.destroy');
+Route::get('/produtos', 'ControladorProduto@indexView')->name('produtos');
+

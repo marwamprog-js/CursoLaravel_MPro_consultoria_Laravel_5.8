@@ -105,4 +105,13 @@ class ControladorCategoria extends Controller
         }
         return redirect()->route('categorias');
     }
+
+    //##### API
+
+    public function getAllJson()
+    {
+        $cats = Categoria::all();
+        return json_encode($cats);
+    }
+    
 }

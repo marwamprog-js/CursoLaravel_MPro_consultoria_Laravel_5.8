@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produto;
-use App\Categoria;
 
 class ControladorProduto extends Controller
 {
@@ -13,15 +12,15 @@ class ControladorProduto extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function indexView()
+    {
+        return view('produtos.produtos');
+    }
+
     public function index()
     {
-
-        $produtos = Produto::all();
-        $categorias = Categoria::all();
-
-       
-
-        return view('produtos.produtos', compact(['produtos', 'categorias']));
+        $prods = Produto::all();
+        return $prods->toJson();
     }
 
     /**
@@ -31,9 +30,7 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();        
-
-        return view('produtos.novo', compact('categorias'));
+        
     }
 
     /**
@@ -44,15 +41,7 @@ class ControladorProduto extends Controller
      */
     public function store(Request $request)
     {
-        $produto = new Produto();
-        $produto->nome = $request->input('nome');
-        $produto->estoque = $request->input('estoque');
-        $produto->preco = $request->input('preco');
-        $produto->categoria_id = $request->input('categoria');
-
-        $produto->save();
-
-        return redirect()->route("produtos");
+        
     }
 
     /**
@@ -74,10 +63,7 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
-        $prod = Produto::find($id);
-        $categorias = Categoria::all();
-
-        return view('produtos.editar', compact(['categorias', 'prod']));
+        
     }
 
     /**
@@ -89,18 +75,7 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        $prod = Produto::find($id);
-
-        if(isset($prod)) {
-            $prod->nome = $request->input('nome');
-            $prod->estoque = $request->input('estoque');
-            $prod->preco = $request->input('preco');
-            $prod->categoria_id = $request->input('categoria');
-            $prod->save();
-        }
-
-        return redirect()->route('produtos');
-
+        
     }
 
     /**
@@ -111,12 +86,6 @@ class ControladorProduto extends Controller
      */
     public function destroy($id)
     {
-        $prod = Produto::find($id);
-
-        if(isset($prod)) {
-            $prod->delete();
-        }
-
-        return redirect()->route('produtos');
+        
     }
 }
