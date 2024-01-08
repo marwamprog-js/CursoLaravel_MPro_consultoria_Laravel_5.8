@@ -14,7 +14,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/usuarios', 'UsuarioControlador@index');
+Route::get('/usuarios', 'UsuarioControlador@index')
+    ->middleware('segundo', 'primeiro');
+
 Route::get('/teste', function() {
     return "Test";
-});
+})->middleware('primeiro');
