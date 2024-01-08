@@ -24,13 +24,19 @@ Route::get('/negado', function() {
     return "Acesso negado";
 })->name('negado');
 
+Route::get('/negadouser', function() {
+    return "Você não tem permissão para acessar esta rota";
+})->name('negadouser');
+
 Route::post('/login', function (Request $req) {
 
     $login_ok = false;
+    $admin = false;
 
     switch($req->input('user')) {
         case 'joao':
             $login_ok = $req->input('password') === "senhajoao";
+            $admin = true;
             break;
         case 'marcos':
             $login_ok = $req->input('password') === "senhamarcos";
@@ -40,7 +46,7 @@ Route::post('/login', function (Request $req) {
     }
 
     if($login_ok) {
-        $login = ['user' => $req->input('user')];
+        $login = ['user' => $req->input('user'), 'admin' => $admin ];
         $req->session()->put('login', $login);
         return response("Login OK", 200);
     } else {

@@ -17,7 +17,12 @@ class ProdutoAdmin
     {
 
         if($request->session()->exists('login')){
-            return $next($request); 
+            $login = $request->session()->get('login');
+            if($login['admin']) {
+                return $next($request); 
+            } else {
+                return redirect()->route('negadouser');
+            }
         } else {
             return redirect()->route('negado');
         }
