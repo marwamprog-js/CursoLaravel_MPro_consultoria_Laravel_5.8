@@ -105,3 +105,22 @@ Route::get('/adicionarproduto', function() {
     return $p->toJson();
 
 });
+
+Route::get('/adicionarproduto/{cat}', function($catId) {
+    
+    $cat = Categoria::with('produtos')->find($catId);
+   
+    $p = new Produto();
+    $p->nome = "Meu novo produto Adicionado";
+    $p->estoque = 50;
+    $p->preco = 500;
+
+    if(isset($cat)) {
+        $cat->produtos()->save($p);
+    }
+
+    $cat->load('produtos'); //Recarrega os produtos depois de serem adicionados.
+    return $cat->toJson();
+
+
+});
