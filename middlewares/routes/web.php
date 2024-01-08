@@ -20,3 +20,7 @@ Route::get('/usuarios', 'UsuarioControlador@index')
 Route::get('/teste', function() {
     return "Test";
 })->middleware('primeiro');
+
+Route::get('terceiro', function() {
+    return "Passou pelo terceiro middleware";
+})->middleware('terceiro:joao,20');
