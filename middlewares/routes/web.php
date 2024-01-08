@@ -15,5 +15,4 @@ use App\Http\Middleware\PrimeiroMiddleware;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/usuarios', 'UsuarioControlador@index')
-    ->middleware('primeiro');
+Route::get('/usuarios', 'UsuarioControlador@index');
