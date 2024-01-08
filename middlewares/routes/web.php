@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\PrimeiroMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Route;
+
+Route::get('/usuarios', 'UsuarioControlador@index')
+    ->middleware(PrimeiroMiddleware::class);
