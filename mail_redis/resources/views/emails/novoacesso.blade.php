@@ -12,7 +12,7 @@
     <p>Data/Hora de acesso: {{ $datahora }}</p>
 
     <div>
-        <img src="{{ $message->embed( public() . '/image/laravel.jpg' ) }}" width="10%" height="10%" alt="">
+        {{-- <img src="{{ $message->embed( public() . '/image/laravel.jpg' ) }}" width="10%" height="10%" alt=""> --}}
     </div>
 </body>
 </html>

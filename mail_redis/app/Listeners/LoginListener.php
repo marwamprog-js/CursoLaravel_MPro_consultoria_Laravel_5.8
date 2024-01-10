@@ -30,8 +30,12 @@ class LoginListener
     {
         info($event->user->name);
         info($event->user->email);
+        $quando = now()->addMinute(5);
 
         //User, users[], email
-        Mail::to($event->user)->send(new NovoAcesso($event->user));
+        Mail::to($event->user)
+            // ->send(new NovoAcesso($event->user));
+            // ->queue(new NovoAcesso($event->user)); //Manda para o redis a responsabilidade de enviar email
+            ->later($quando, new NovoAcesso($event->user)); //Ação de postergar o evento, ou seja, sera processado depois de um tempo
     }
 }
