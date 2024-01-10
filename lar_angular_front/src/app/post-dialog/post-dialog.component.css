@@ -1,0 +1,12 @@
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    width: 95%;
+}
+
+#form textarea {
+    height: 300px;
+}
